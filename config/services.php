@@ -44,7 +44,8 @@ return [
         ],
     ],
     'url' => [
-        'baHa' => 'https://ani.gamer.com.tw/'
+        'baHa'  => 'https://ani.gamer.com.tw/',
+        'astro' => 'http://astro.click108.com.tw/daily_8.php?iAstro=8'
     ]
 
 ];
