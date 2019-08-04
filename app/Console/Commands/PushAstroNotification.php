@@ -37,7 +37,7 @@ class PushAstroNotification extends Command
         parent::__construct();
         $this->path = config('services.url.astro');
         $this->crawlerService = $crawlerService;
-        $this->lineBotService = new LineBotService(env('LINE_USER_ID'));
+        $this->lineBotService = new LineBotService();
     }
 
     /**
@@ -50,6 +50,6 @@ class PushAstroNotification extends Command
         $originalData = $this->crawlerService->getOriginalData($this->path);
         $message = $this->crawlerService->getNewAstroFromYahoo($originalData);
 
-        $this->lineBotService->pushMessage($message);
+        $this->lineBotService->pushMessage(env('LINE_USER_ID'),$message);
     }
 }
