@@ -13,23 +13,16 @@ class LineBotService
     private $secret = '';
 
     private $lineBot;
-    private $lineUserId;
 
-    public function __construct($lineUserId)
+    public function __construct()
     {
         $this->token = env('LINEBOT_TOKEN');
         $this->secret = env('LINEBOT_SECRET');
-        // $this->lineUserId = $lineUserId;
-        $this->lineUserId = $lineUserId;
+
         $this->httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($this->token);
 
         $this->lineBot = new \LINE\LINEBot($this->httpClient, ['channelSecret' => $this->secret]);
     }
-
-    public function fake()
-    {
-    }
-
 
     public function buildImagesMessageBuilder(array $data, string $notificationText = 'Hello 這是今日的金句!')
     {
@@ -58,11 +51,11 @@ class LineBotService
         );
     }
 
-    public function pushMessage($content)
+    public function pushMessage($lineUserId,$content)
     {
         if (is_string($content)) {
             $content = new TextMessageBuilder($content);
         }
-        return $this->lineBot->pushMessage($this->lineUserId, $content);
+        return $this->lineBot->pushMessage($lineUserId, $content);
     }
 }

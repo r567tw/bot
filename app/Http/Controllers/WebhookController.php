@@ -3,34 +3,32 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use LINE\LINEBot\Constant\HTTPHeader;
+use App\Services\LineBotService;
+use App\Services\WebhookResponseService;
+use App\Transformers\Requests\WebhookRequestTransformer;
 
 class WebhookController extends Controller
 {
 
-    private $token = '';
-    private $secret = '';
-
-
-    public function __construct()
-    {
-        $this->token = env('LINEBOT_TOKEN');
-        $this->secret = env('LINEBOT_SECRET');
-
-        $this->httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($this->token);
-
-        $this->bot = new \LINE\LINEBot($this->httpClient, ['channelSecret' => $this->secret]);
+    public function __construct(
+        WebhookResponseService $responseService,
+        LineBotService $bot
+    ){
+        $this->bot = $bot;
+        $this->responseService = $responseService;
     }
 
-    public function index(Request $request)
+    public function index(Request $request,WebhookRequestTransformer $reqTransformer)
     {
-        $events = $request['events'];
+        foreach ($request['events'] as $event) {
 
-        foreach ($events as $event) {
-            // Log::info($event['replyToken']);
-            $resp = $this->bot->replyText($event['replyToken'], 'Hello start Sub-Bot');
+            $webhookRequest = $reqTransformer->tramsforRequest($event);
+
+            $this->bot->pushMessage(
+                $webhookRequest['userId'],
+                $response = $this->responseService->returnResponse($webhookRequest['content']));
         }
-        return '';
+
+        return $response;
     }
 }
