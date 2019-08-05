@@ -95,17 +95,4 @@ class CrawlerService
 
         return $result;
     }
-
-    public function getWeeklyAstroFromYahoo(Crawler $crawler,$today)
-    {
-        $target = $crawler->filterXPath('//div[contains(@class, "TODAY_CONTENT")]');
-
-        // process string content!
-        $result = str_replace(' ','',$target->text());
-        $result = str_replace("\r\n今日射手座解析","\r\n{$today} 射手座解析",$result);
-        $result = str_replace('：',"：",$result);
-
-
-        return $result;
-    }
 }
