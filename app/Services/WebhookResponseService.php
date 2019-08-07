@@ -37,10 +37,11 @@ class WebhookResponseService
                 $originalData = $this->service->getOriginalData($url);
                 return $this->service->getNewAstroFromYahoo($originalData);
             case '本周運勢':
+                $weekday = Carbon::now('Asia/Taipei')->weekday();
                 $startOfWeek = Carbon::now('Asia/Taipei')->startofWeek();
                 $content = "本周運勢:\r\n";
-                for ($i = 0; $i < 7; $i++) {
-                    $day = $startOfWeek->addDay($i);
+                for ($i = $weekday; $i < 8; $i++) {
+                    $day = Carbon::now('Asia/Taipei')->addDay($i - $weekday);
                     $date = $day->format('Y-m-d');
                     $url = config('services.url.astro') . '&iAcDay=' . $date;
                     $originalData = $this->service->getOriginalData($url);
