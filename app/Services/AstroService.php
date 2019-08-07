@@ -1,11 +1,12 @@
 <?php
+
 namespace App\Services;
 
 use GuzzleHttp\Client;
 use Symfony\Component\DomCrawler\Crawler;
 use Carbon\Carbon;
 
-class CrawlerService
+class AstroService
 {
     /** @var Client  */
     private $client;
@@ -86,12 +87,12 @@ class CrawlerService
         $today = Carbon::today()->toDateString();
 
         // process string content!
-        $result = str_replace(' ','',$target->text());
-        $result = str_replace("\r\n今日射手座解析","{$today} 今日射手座解析",$result);
-        $result = str_replace('：',"：\r\n",$result);
-        $result = str_replace('整體運勢',"\r\n整體運勢",$result);
-        $result = str_replace('愛情運勢',"\r\n愛情運勢",$result);
-        $result = str_replace('財運運勢',"\r\n財運運勢",$result);
+        $result = str_replace(' ', '', $target->text());
+        $result = str_replace("\r\n今日射手座解析", "{$today} 今日射手座解析", $result);
+        $result = str_replace('：', "：\r\n", $result);
+        $result = str_replace('整體運勢', "\r\n整體運勢", $result);
+        $result = str_replace('愛情運勢', "\r\n愛情運勢", $result);
+        $result = str_replace('財運運勢', "\r\n財運運勢", $result);
 
         return $result;
     }

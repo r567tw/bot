@@ -9,6 +9,7 @@ use Carbon\Carbon;
 class WebhookResponseService
 {
     private $client;
+    private $service;
 
     public function __construct(
         CrawlerService $service
@@ -39,10 +40,11 @@ class WebhookResponseService
                 $startOfWeek = Carbon::now('Asia/Taipei')->startofWeek();
                 $content = "本周運勢:\r\n";
                 for ($i = 0; $i < 7; $i++) {
-                    $day = $startOfWeek->addDay();
-                    $url = config('services.url.astro') . '&iAcDay=' . $day->format('Y-m-d');
+                    $day = $startOfWeek->addDay($i);
+                    $date = $day->format('Y-m-d');
+                    $url = config('services.url.astro') . '&iAcDay=' . $date;
                     $originalData = $this->service->getOriginalData($url);
-                    $content .= $this->service->getWeeklyAstroFromYahoo($originalData, $day->format('Y-m-d'));
+                    $content .= $this->service->getWeeklyAstroFromYahoo($originalData, $date);
                 }
                 return $content;
             default:
