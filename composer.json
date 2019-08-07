@@ -15,6 +15,7 @@
         "laravel/tinker": "^1.0",
         "linecorp/line-bot-sdk": "^3.12",
         "maknz/slack": "^1.7",
+        "rap2hpoutre/laravel-log-viewer": "^1.2",
         "symfony/dom-crawler": "^4.3"
     },
     "require-dev": {
