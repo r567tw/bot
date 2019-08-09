@@ -10,11 +10,14 @@ class WebhookResponseService
 {
     private $client;
     private $service;
+    private $weather;
 
     public function __construct(
-        CrawlerService $service
+        CrawlerService $service,
+        WeatherService $weather
     ) {
         $this->service = $service;
+        $this->weather = $weather;
         $this->client = new Client();
     }
 
@@ -48,6 +51,11 @@ class WebhookResponseService
                     $content .= $this->service->getWeeklyAstroFromYahoo($originalData, $date);
                 }
                 return $content;
+            case '今日天氣':
+                return dd($this->weather->getApiData());
+                // return '';
+
+
             default:
                 return '[Playground]目前我無法處理此訊息～之後將開發更多新功能，盡請期待！';
         }
