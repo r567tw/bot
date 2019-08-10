@@ -5,6 +5,7 @@ namespace App\Services;
 use GuzzleHttp\Client;
 use App\Services\CrawlerService;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class WebhookResponseService
 {
@@ -51,8 +52,8 @@ class WebhookResponseService
                     $content .= $this->service->getWeeklyAstroFromYahoo($originalData, $date);
                 }
                 return $content;
-            case '今日天氣':
-                return $this->weather->getApiData();
+            case Str::startsWith($message, '今日天氣'):
+                return $this->weather->getApiData($message);
 
             default:
                 return '[Playground]目前我無法處理此訊息～之後將開發更多新功能，盡請期待！';

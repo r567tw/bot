@@ -15,8 +15,10 @@ class WeatherService
         $this->client = $client;
     }
 
-    public function getApiData()
+    public function getApiData($message)
     {
+        $location = $this->transforToLocation($message);
+
         $url = 'https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001';
 
         $options = [
@@ -26,7 +28,7 @@ class WeatherService
             'query' => [
                 'Authorization' => 'CWB-8617C293-566E-4A6E-BDBB-59443A4134C1',
                 'format' => 'JSON',
-                'locationName' => '臺北市'
+                'locationName' => $location
             ]
         ];
 
@@ -52,6 +54,16 @@ class WeatherService
         }
 
         return $result;
+    }
+
+    private function transforToLocation($message)
+    {
+        $query = explode(':', $message);
+        if (count($query) >= 2) {
+            return $query[1];
+        } else {
+            return '臺北市';
+        }
     }
 
     private function getTimeClock(String $time)

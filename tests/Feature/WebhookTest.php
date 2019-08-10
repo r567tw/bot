@@ -41,6 +41,16 @@ class WebhookTest extends TestCase
         $response->assertSeeText('今日天氣:');
     }
 
+    public function testGetTaitungTodayWeather()
+    {
+        $this->withoutExceptionHandling();
+        $request = $this->webhookRequest('今日天氣:臺東縣');
+        $response = $this->post('webhook', $request);
+
+        $response->assertStatus(200);
+        $response->assertSeeText('臺東縣');
+    }
+
     private function webhookRequest($message)
     {
         return array(
