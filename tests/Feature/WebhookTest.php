@@ -33,7 +33,7 @@ class WebhookTest extends TestCase
 
     public function testGetTodayWeather()
     {
-        // $this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
         $request = $this->webhookRequest('今日天氣');
         $response = $this->post('webhook', $request);
 

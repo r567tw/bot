@@ -52,9 +52,7 @@ class WebhookResponseService
                 }
                 return $content;
             case '今日天氣':
-                return dd($this->weather->getApiData());
-                // return '';
-
+                return $this->weather->getApiData();
 
             default:
                 return '[Playground]目前我無法處理此訊息～之後將開發更多新功能，盡請期待！';
