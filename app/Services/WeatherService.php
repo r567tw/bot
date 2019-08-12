@@ -49,7 +49,7 @@ class WeatherService
         // $result .= "時間範圍:天氣現象/降雨機率/最低溫度～最高溫度/舒適度\n";
         // $result .= "";
         foreach ($reports as $key => $report) {
-            $result .= "\n{$localcationName}未來三十六小時{$key}\n";
+            $result .= "\n{$localcationName}未來二十四小時{$key}\n";
             $result .= $report;
         }
 
@@ -76,7 +76,7 @@ class WeatherService
     {
         $report = '';
 
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 2; $i++) {
             $report .= $this->getTimeClock($data->time[$i]->startTime);
             $report .= "-{$this->getTimeClock($data->time[$i]->endTime)}: ";
             $report .= "{$data->time[$i]->parameter->parameterName}\n";
@@ -89,7 +89,7 @@ class WeatherService
     {
         $report = '';
 
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 2; $i++) {
             $report .= $this->getTimeClock($data->time[$i]->startTime);
             $report .= "-{$this->getTimeClock($data->time[$i]->endTime)}: ";
             $report .= "{$data->time[$i]->parameter->parameterName}%\n";
@@ -102,7 +102,7 @@ class WeatherService
     {
         $report = '';
 
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 2; $i++) {
             $report .= $this->getTimeClock($minTData->time[$i]->startTime);
             $report .= "-{$this->getTimeClock($minTData->time[$i]->endTime)}: ";
             $MinUnit = trim($minTData->time[$i]->parameter->parameterUnit);
@@ -118,7 +118,7 @@ class WeatherService
     {
         $report = '';
 
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 2; $i++) {
             $report .= $this->getTimeClock($data->time[$i]->startTime);
             $report .= "-{$this->getTimeClock($data->time[$i]->endTime)}: ";
             $report .= "{$data->time[$i]->parameter->parameterName}\n";
