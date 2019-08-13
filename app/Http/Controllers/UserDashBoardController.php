@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserDashBoardController extends Controller
 {
+
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware(['admin']);
     }
     /**
      * Display a listing of the resource.
@@ -17,7 +20,8 @@ class UserDashBoardController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::orderBy('is_developer', 'DESC')->orderBy('is_admin', 'DESC')->get();
+        return view('users.index')->withUsers($users);
     }
 
     /**
@@ -27,7 +31,7 @@ class UserDashBoardController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
@@ -38,7 +42,10 @@ class UserDashBoardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inputs = $request->all();
+        $inputs['password'] = Hash::make('password');
+        User::create($inputs);
+        return redirect('/users');
     }
 
     /**
@@ -47,9 +54,9 @@ class UserDashBoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -58,9 +65,9 @@ class UserDashBoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('users.edit')->withUser($user);
     }
 
     /**
@@ -70,9 +77,11 @@ class UserDashBoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $inputs = $request->all();
+        $user->update($inputs);
+        return redirect('/users');
     }
 
     /**
@@ -81,8 +90,9 @@ class UserDashBoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect('/users');
     }
 }
