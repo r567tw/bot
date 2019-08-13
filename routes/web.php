@@ -26,3 +26,8 @@ Route::resource('users', 'UserDashBoardController');
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')
     ->name('logs')
     ->middleware(['developer']);
+
+Route::resource('posts', 'PostController');
+Route::get('chat', 'ChatRoomController@index')->name('chatroom');
+Route::post('chat', 'ChatRoomController@store')->name('chat');
+Route::resource('chats', 'ChatController');

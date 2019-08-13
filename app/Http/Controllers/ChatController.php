@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use Illuminate\Support\Facades\Hash;
+use App\Chat;
 
-class UserDashBoardController extends Controller
+class ChatController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware(['admin']);
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -20,8 +19,8 @@ class UserDashBoardController extends Controller
      */
     public function index()
     {
-        $users = User::where('email', '!=', 'r567tw@gmail.com')->orderBy('is_developer', 'DESC')->orderBy('is_admin', 'DESC')->get();
-        return view('users.index')->withUsers($users);
+        $chats = Chat::all();
+        return view('chats.index')->withChats($chats);
     }
 
     /**
@@ -31,7 +30,8 @@ class UserDashBoardController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $chat = new Chat();
+        return view('chats.update')->withChat($chat);
     }
 
     /**
@@ -42,10 +42,12 @@ class UserDashBoardController extends Controller
      */
     public function store(Request $request)
     {
-        $inputs = $request->all();
-        $inputs['password'] = Hash::make('password');
-        User::create($inputs);
-        return redirect('/users');
+        $values = $request->all();
+        $values['user_id'] = auth()->user()->id;
+
+        Chat::create($values);
+
+        return redirect('/chats');
     }
 
     /**
@@ -54,9 +56,9 @@ class UserDashBoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Chat $chat)
     {
-        return abort(404);
+        return view('chats.show')->withChat($chat);
     }
 
     /**
@@ -65,9 +67,9 @@ class UserDashBoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Chat $chat)
     {
-        return view('users.edit')->withUser($user);
+        return view('chats.update')->withChat($chat);
     }
 
     /**
@@ -77,11 +79,13 @@ class UserDashBoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Chat $chat)
     {
-        $inputs = $request->all();
-        $user->update($inputs);
-        return redirect('/users');
+        $values = $request->all();
+        $values['user_id'] = auth()->user()->id;
+
+        $chat->update($values);
+        return redirect('/chats');
     }
 
     /**
@@ -90,9 +94,9 @@ class UserDashBoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Chat $chat)
     {
-        $user->delete();
-        return redirect('/users');
+        $chat->delete();
+        return redirect('/chats');
     }
 }

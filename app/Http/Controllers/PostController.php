@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use Illuminate\Support\Facades\Hash;
+use App\Post;
 
-class UserDashBoardController extends Controller
+class PostController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware(['admin']);
+        $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,8 +20,8 @@ class UserDashBoardController extends Controller
      */
     public function index()
     {
-        $users = User::where('email', '!=', 'r567tw@gmail.com')->orderBy('is_developer', 'DESC')->orderBy('is_admin', 'DESC')->get();
-        return view('users.index')->withUsers($users);
+        $posts = Post::all();
+        return view('posts.index')->withPosts($posts);
     }
 
     /**
@@ -31,7 +31,8 @@ class UserDashBoardController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $post = new Post();
+        return view('posts.update')->withPost($post);
     }
 
     /**
@@ -42,10 +43,10 @@ class UserDashBoardController extends Controller
      */
     public function store(Request $request)
     {
-        $inputs = $request->all();
-        $inputs['password'] = Hash::make('password');
-        User::create($inputs);
-        return redirect('/users');
+        $values = $request->all();
+        $values['user_id'] = auth()->user()->id;
+        $post = Post::create($values);
+        return redirect('/posts');
     }
 
     /**
@@ -54,9 +55,9 @@ class UserDashBoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Post $post)
     {
-        return abort(404);
+        return view('posts.show')->withPost($post);
     }
 
     /**
@@ -65,9 +66,9 @@ class UserDashBoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Post $post)
     {
-        return view('users.edit')->withUser($user);
+        return view('posts.update')->withPost($post);
     }
 
     /**
@@ -77,11 +78,10 @@ class UserDashBoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Post $post)
     {
-        $inputs = $request->all();
-        $user->update($inputs);
-        return redirect('/users');
+        $post->update($request->all());
+        return redirect('/posts');
     }
 
     /**
@@ -90,9 +90,9 @@ class UserDashBoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Post $post)
     {
-        $user->delete();
-        return redirect('/users');
+        $post->delete();
+        return redirect('/posts');
     }
 }

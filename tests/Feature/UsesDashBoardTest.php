@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UsesDashBoardTest extends TestCase
 {
-    use RefreshDatabase;
+    // use RefreshDatabase;
     /**
      * A basic feature test example.
      *
@@ -17,14 +17,14 @@ class UsesDashBoardTest extends TestCase
     public function testDeveloperCanCreateUser()
     {
         $this->actingAs(factory('App\User')->create(['is_admin' => true]));
-        $response = $this->json('GET', '/api/users/create');
+        $response = $this->json('GET', '/users/create');
         $response->assertOk();
     }
 
     public function testNonDeveloperCanNotCreateUser()
     {
         $this->actingAs(factory('App\User')->create(['is_admin' => false]));
-        $response = $this->json('GET', '/api/users/create');
+        $response = $this->json('GET', '/users/create');
         $response->assertForbidden();
     }
 

@@ -19,6 +19,9 @@ class UsersTableSeeder extends Seeder
             'is_developer' => true
         ]);
 
-        factory(App\User::class, 1)->create();
+        factory(App\User::class, 2)->create()->each(function ($user) {
+            factory(App\Post::class, 1)->create(['user_id' => $user->id]);
+            factory(App\Chat::class, 2)->create(['user_id' => $user->id]);
+        });;
     }
 }
