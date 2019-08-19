@@ -4,13 +4,12 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Services\CrawlerService;
+use App\Services\AstroService;
 use App\Services\LineBotService;
 
 class PushAstroNotification extends Command
 {
-    private $path;
-
-    private $crawlerService;
+    private $astro;
 
     private $lineBotService;
     /**
@@ -32,11 +31,10 @@ class PushAstroNotification extends Command
      *
      * @return void
      */
-    public function __construct(CrawlerService $crawlerService)
+    public function __construct(AstroService $astroService)
     {
         parent::__construct();
-        $this->path = config('services.url.astro');
-        $this->crawlerService = $crawlerService;
+        $this->astro = $astroService;
         $this->lineBotService = new LineBotService();
     }
 
@@ -47,9 +45,8 @@ class PushAstroNotification extends Command
      */
     public function handle()
     {
-        $originalData = $this->crawlerService->getOriginalData($this->path);
-        $message = $this->crawlerService->getNewAstroFromYahoo($originalData);
+        $message = $this->astro->getDailyAstro('今日運勢');
 
-        $this->lineBotService->pushMessage(env('LINE_USER_ID'),$message);
+        $this->lineBotService->pushMessage(env('LINE_USER_ID'), $message);
     }
 }

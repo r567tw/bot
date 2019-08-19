@@ -4,22 +4,22 @@ namespace App\Services;
 
 use GuzzleHttp\Client;
 use App\Services\CrawlerService;
+use App\Services\AstroService;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
 class WebhookResponseService
 {
     private $client;
-    private $service;
+    private $astro;
     private $weather;
 
     public function __construct(
-        CrawlerService $service,
+        AstroService $astro,
         WeatherService $weather
     ) {
-        $this->service = $service;
+        $this->astro = $astro;
         $this->weather = $weather;
-        $this->client = new Client();
     }
 
 
@@ -36,22 +36,10 @@ class WebhookResponseService
     {
 
         switch ($message) {
-            case '本日運勢':
-                $url = config('services.url.astro');
-                $originalData = $this->service->getOriginalData($url);
-                return $this->service->getNewAstroFromYahoo($originalData);
-            case '本周運勢':
-                $weekday = Carbon::now('Asia/Taipei')->weekday();
-                $startOfWeek = Carbon::now('Asia/Taipei')->startofWeek();
-                $content = "本周運勢:\r\n";
-                for ($i = $weekday; $i < 8; $i++) {
-                    $day = Carbon::now('Asia/Taipei')->addDay($i - $weekday);
-                    $date = $day->format('Y-m-d');
-                    $url = config('services.url.astro') . '&iAcDay=' . $date;
-                    $originalData = $this->service->getOriginalData($url);
-                    $content .= $this->service->getWeeklyAstroFromYahoo($originalData, $date);
-                }
-                return $content;
+            case Str::startsWith($message, '今日運勢'):
+                return $this->astro->getDailyAstro($message);
+            case Str::startsWith($message, '本周運勢'):
+                return $this->astro->getWeeklyAstro($message);
             case Str::startsWith($message, '今日天氣'):
                 return $this->weather->getApiData($message);
 

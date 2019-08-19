@@ -10,10 +10,12 @@ class CrawlerService
 {
     /** @var Client  */
     private $client;
+    /** @var Crawler */
 
-    public function __construct()
+    public function __construct(Client $client, Crawler $crawler)
     {
-        $this->client = new Client();
+        $this->client = $client;
+        $this->crawler = $crawler;
     }
 
     /**
@@ -23,11 +25,8 @@ class CrawlerService
     public function getOriginalData(string $path)
     {
         $content = $this->client->get($path)->getBody()->getContents();
-        $crawler = new Crawler();
-
-        $crawler->addHtmlContent($content);
-
-        return $crawler;
+        $this->crawler->addHtmlContent($content);
+        return $this->crawler;
     }
 
     public function getNewAnimationFromBaHa(Crawler $crawler): array

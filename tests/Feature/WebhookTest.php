@@ -24,6 +24,8 @@ class WebhookTest extends TestCase
 
     public function testGetWeeklyAstro()
     {
+        $this->withoutExceptionHandling();
+
         $request = $this->webhookRequest('本周運勢');
         $response = $this->post('webhook', $request);
 
@@ -33,7 +35,6 @@ class WebhookTest extends TestCase
 
     public function testGetTodayWeather()
     {
-        $this->withoutExceptionHandling();
         $request = $this->webhookRequest('今日天氣');
         $response = $this->post('webhook', $request);
 
@@ -43,7 +44,6 @@ class WebhookTest extends TestCase
 
     public function testGetTaitungTodayWeather()
     {
-        $this->withoutExceptionHandling();
         $request = $this->webhookRequest('今日天氣:臺東縣');
         $response = $this->post('webhook', $request);
 
