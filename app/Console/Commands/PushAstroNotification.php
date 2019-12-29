@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Services\CrawlerService;
-use App\Services\AstroService;
+use App\Services\Features\AstroService;
 use App\Services\LineBotService;
 
 class PushAstroNotification extends Command

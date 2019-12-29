@@ -4,7 +4,9 @@ namespace App\Services;
 
 use GuzzleHttp\Client;
 use App\Services\CrawlerService;
-use App\Services\AstroService;
+use App\Services\Features\AstroService;
+use App\Services\Features\WeatherService;
+use App\Services\Features\ExchangeService;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
@@ -16,7 +18,8 @@ class WebhookResponseService
 
     public function __construct(
         AstroService $astro,
-        WeatherService $weather
+        WeatherService $weather,
+        ExchangeService $exchange
     ) {
         $this->astro = $astro;
         $this->weather = $weather;

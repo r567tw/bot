@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Services\WeatherService;
+use App\Services\Features\WeatherService;
 use App\Services\LineBotService;
 
 class PushWeatherNotification extends Command

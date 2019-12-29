@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Features;
 
 use GuzzleHttp\Client;
 use Symfony\Component\DomCrawler\Crawler;
@@ -18,4 +18,6 @@ class ExchangeService
         $this->client = $client;
         $this->crawler = $crawler;
     }
+
+
 }

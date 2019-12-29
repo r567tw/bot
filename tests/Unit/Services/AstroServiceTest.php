@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Services;
 
-use App\Services\AstroService;
+use App\Services\Features\AstroService;
 use Tests\TestCase;
 
 use GuzzleHttp\Client;
