@@ -23,6 +23,7 @@ class WebhookResponseService
     ) {
         $this->astro = $astro;
         $this->weather = $weather;
+        $this->exchange = $exchange;
     }
 
 
@@ -45,7 +46,8 @@ class WebhookResponseService
                 return $this->astro->getWeeklyAstro($message);
             case Str::startsWith($message, '今日天氣'):
                 return $this->weather->getApiData($message);
-
+            case Str::startsWith($message, 'exchange'):
+                return $this->exchange->exchange($message);
             default:
                 return '[Playground]目前我無法處理此訊息～之後將開發更多新功能，盡請期待！';
         }

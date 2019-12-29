@@ -27,6 +27,7 @@ class WebhookRequestTransformer
         $message = str_replace('今天', '今日', $message);
         $message = str_replace('本週', '本周', $message);
         $message = str_replace('這禮拜', '本周', $message);
+        $message = str_replace('換匯', 'exchange', $message);
 
         return $message;
     }
