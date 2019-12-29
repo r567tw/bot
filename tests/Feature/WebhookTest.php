@@ -51,6 +51,16 @@ class WebhookTest extends TestCase
         $response->assertSeeText('臺東縣');
     }
 
+    public function testGetExchangeOftwdtokrw()
+    {
+        $request = $this->webhookRequest('exchange:30,twd,krw');
+        $response = $this->post('webhook', $request);
+
+        $response->assertStatus(200);
+        $response->assertSeeText('krw');
+
+    }
+
     private function webhookRequest($message)
     {
         return array(
