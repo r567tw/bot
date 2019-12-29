@@ -14,7 +14,7 @@ class ExchangeServiceTest extends TestCase
     public function testServiceGetExchange()
     {
         $service = new ExchangeService(new Client(), new Crawler());
-        $result = $service->exchange(30,'twd','krw');
+        $result = $service->exchange('exchange:30,twd,krw');
         $this->assertStringContainsString('KRW', $result);
     }
 
