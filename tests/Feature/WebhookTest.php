@@ -57,7 +57,7 @@ class WebhookTest extends TestCase
         $response = $this->post('webhook', $request);
 
         $response->assertStatus(200);
-        $response->assertSeeText('krw');
+        $response->assertSeeText('KRW');
 
     }
 
