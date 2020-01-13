@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
-<div class="container">
+<div class="container" id="exchangeApp">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
@@ -10,79 +9,70 @@
 
                 <div class="card-body" id="exchangeApp">
                     <div class="form-inline">
-                        <input type="number" name="NeedExchange" class="form-control col-md-3" id=""
+                        <input type="text" name="NeedExchange" class="form-control col-md-3" id="y"
                             v-model="NeedExchange">
                         <div class="col-md-9">
                             <select class="form-control" name="NeedExchangeUnit" id="" v-model="NeedExchangeUnit">
-                                <option v-for="symbol in symbols">@{{ symbol  }}</option>
+                                <option v-for="symbol in symbols" v-bind:key="symbol.dollar" :value="symbol.dollar" >@{{ symbol.name  }}</option>
                             </select>
-                            @{{ symbols }}
+
                         </div>
                     </div>
                     <br />
                     <div class="form-inline">
-                        <input type="number" name="ForExchange" class="form-control col-md-3" id=""
+                        <input type="text" name="ForExchange" class="form-control col-md-3" id="x"
                             v-model="ForExchange">
                         <div class="col-md-9">
-                            <select class="form-control" name="ForExchangeUnit" id="" v-model="ForExchangeUnit">
-                                @foreach (Config::get('exchange.options'); as $dollar=>$name)
-                                <option value="{{ $dollar }}">{{ $name }}</option>
-                                @endforeach
-                            </select>
+                            <select class="form-control" name="NeedExchangeUnit" id="" v-model="ForExchangeUnit">
+<option v-for="symbol in symbols" v-bind:key="symbol.dollar" :value="symbol.dollar">@{{ symbol.name  }}</option>                            </select>
                         </div>
                     </div>
                     <br />
-                    <input class="form-control" type="text" name="result" disabled>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
 <script>
     const vm = new Vue({
-        el: '#exchangeApp',
-        data:{
-            NeedExchange: '0.0',
-            ForExchange: '0.0',
-            NeedExchangeUnit: 'USD',
-            ForExchangeUnit: 'TWD',
-            symbols:[],
-        },
-        methods:{
-            fetchSymbols(){
-                var v = this;
-                fetch('http://data.fixer.io/api/symbols?access_key=f6dfba2a7214bf6896ebb7f527e11a19')
-                .then(function(resp){
-                    if (resp.status !== 200) {
-                        console.log('Looks like there was a problem. Status Code: ' +
-                        resp.status);
-                        return;
-                    }
-
-                    // Examine the text in the response
-                    resp.json().then(function(data) {
-                        var dollars = [];
-                        for(var i in data.symbols){
-                            dollars.push({'name': i,'dollar': data.symbols[i]});
+            el: '#exchangeApp',
+            data:{
+                NeedExchangeUnit: 'USD',
+                ForExchangeUnit: 'TWD',
+                symbols: []
+            },
+            created(){
+               this.fetchSymbols();
+            },
+            methods:{
+                fetchSymbols(){
+                    var self = this;
+                    axios.get('http://data.fixer.io/api/symbols?access_key=f6dfba2a7214bf6896ebb7f527e11a19')
+                    .then(resp=>{
+                        var symbolsData = resp.data.symbols;
+                        var arrayData = []
+                        for(symbol in symbolsData){
+                            arrayData.push({name: symbolsData[symbol], dollar: symbol})
                         }
-                        //console.log(dollars);
-                        v.symbols = dollars;
-                        console.log(v);
-                    });
-                })
-                .catch(function(err){
-                    console.log(err);
-                });
+                        // console.log(arrayData);
+                        this.symbols = arrayData
+                    })
+                    .catch(err=>{
+                        console.log(err)
+                    })
+                }
+            },
+            computed:{
+                NeedExchange(){
+                    return 0.0
+                },
+                ForExchange(){
+                    return 0.0
+                }
             }
-        },
-        computed:{
-            result(){
-
-            }
-        },
-        mounted(){
-            this.fetchSymbols();
-        }
-})
+    });
 </script>
 @endsection
