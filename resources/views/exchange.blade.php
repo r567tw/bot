@@ -9,25 +9,51 @@
 
                 <div class="card-body" id="exchangeApp">
                     <div class="form-inline">
-                        <input type="text" name="NeedExchange" class="form-control col-md-3" id="y"
-                            v-model="NeedExchange">
-                        <div class="col-md-9">
-                            <select class="form-control" name="NeedExchangeUnit" id="" v-model="NeedExchangeUnit">
-                                <option v-for="symbol in symbols" v-bind:key="symbol.dollar" :value="symbol.dollar" >@{{ symbol.name  }}</option>
+                        <label class="col-md-2" for="NeedExchange">被換的貨幣與數字</label>
+                        <input type="number" name="NeedExchange" class="form-control col-md-3" id="NeedExchange"
+                            v-model="NeedExchange" @change="exchangeTo(NeedExchange,NeedExchangeUnit,ForExchangeUnit)"
+                            step=0.01>
+                        <div class="col-md-6">
+                            <select class="form-control" name="NeedExchangeUnit" id="" v-model="NeedExchangeUnit"
+                                @change="exchangeTo(NeedExchange,NeedExchangeUnit,ForExchangeUnit)">
+                                <option v-for="symbol in symbols" v-bind:key="symbol.dollar" :value="symbol.dollar">
+                                    @{{ symbol.name  }}</option>
                             </select>
 
                         </div>
                     </div>
                     <br />
                     <div class="form-inline">
-                        <input type="text" name="ForExchange" class="form-control col-md-3" id="x"
-                            v-model="ForExchange">
-                        <div class="col-md-9">
-                            <select class="form-control" name="NeedExchangeUnit" id="" v-model="ForExchangeUnit">
-<option v-for="symbol in symbols" v-bind:key="symbol.dollar" :value="symbol.dollar">@{{ symbol.name  }}</option>                            </select>
+                        <label class="col-md-2" for="ForExchange">被換的貨幣與數字</label>
+                        <input type="number" name="ForExchange" class="form-control col-md-3" id="ForExchange"
+                            v-model="ForExchange" @change="exchangeBack(ForExchange,ForExchangeUnit,NeedExchangeUnit)">
+                        <div class="col-md-6">
+                            <select class="form-control" name="ForExchangeUnit" id="" v-model="ForExchangeUnit"
+                                @change="exchangeBack(ForExchange,ForExchangeUnit,NeedExchangeUnit)">
+                                <option v-for="symbol in symbols" v-bind:key="symbol.dollar" :value="symbol.dollar">
+                                    @{{ symbol.name  }}</option>
+                            </select>
                         </div>
                     </div>
                     <br />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3>快速選擇被換的貨幣單位</h3>
+                            <button @click="SetNeedExchangeUnit('TWD')">新台幣</button>
+                            <button @click="SetNeedExchangeUnit('USD')">美元</button>
+                            <button @click="SetNeedExchangeUnit('CNY')">人民幣</button>
+                            <button @click="SetNeedExchangeUnit('KRW')">韓元</button>
+                            <button @click="SetNeedExchangeUnit('JPY')">日圓</button>
+                        </div>
+                        <div class="col-md-6">
+                            <h3>快速選擇欲換的貨幣單位</h3>
+                            <button @click="SetForExchangeUnit('TWD')">新台幣</button>
+                            <button @click="SetForExchangeUnit('USD')">美元</button>
+                            <button @click="SetForExchangeUnit('CNY')">人民幣</button>
+                            <button @click="SetForExchangeUnit('KRW')">韓元</button>
+                            <button @click="SetForExchangeUnit('JPY')">日圓</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -38,41 +64,74 @@
 @section('script')
 <script>
     const vm = new Vue({
-            el: '#exchangeApp',
-            data:{
-                NeedExchangeUnit: 'USD',
-                ForExchangeUnit: 'TWD',
-                symbols: []
-            },
-            created(){
-               this.fetchSymbols();
-            },
-            methods:{
-                fetchSymbols(){
-                    var self = this;
-                    axios.get('http://data.fixer.io/api/symbols?access_key=f6dfba2a7214bf6896ebb7f527e11a19')
-                    .then(resp=>{
+        el: '#exchangeApp',
+        data: {
+            NeedExchange: 0.0,
+            ForExchange: 0.0,
+            NeedExchangeUnit: 'USD',
+            ForExchangeUnit: 'TWD',
+            symbols: [],
+            rates: {}
+        },
+        created() {
+            this.fetchSymbols();
+        },
+        methods: {
+            fetchSymbols() {
+                var self = this;
+                axios.get('http://data.fixer.io/api/symbols?access_key=f6dfba2a7214bf6896ebb7f527e11a19')
+                    .then(resp => {
                         var symbolsData = resp.data.symbols;
                         var arrayData = []
-                        for(symbol in symbolsData){
-                            arrayData.push({name: symbolsData[symbol], dollar: symbol})
+                        for (symbol in symbolsData) {
+                            arrayData.push({ name: symbolsData[symbol], dollar: symbol })
                         }
                         // console.log(arrayData);
                         this.symbols = arrayData
                     })
-                    .catch(err=>{
+                    .catch(err => {
                         console.log(err)
                     })
-                }
             },
-            computed:{
-                NeedExchange(){
-                    return 0.0
-                },
-                ForExchange(){
-                    return 0.0
-                }
+            exchangeTo(insert, needUnit, forUnit) {
+                var self = this;
+                url = 'http://data.fixer.io/api/latest?access_key=f6dfba2a7214bf6896ebb7f527e11a19'
+                url += '&symbols=' + needUnit + ',' + forUnit
+
+                axios.get(url)
+                    .then(resp => {
+                        rates = resp.data.rates
+                        console.log((insert / rates[needUnit]) * rates[forUnit])
+                        this.ForExchange = ((insert / rates[needUnit]) * rates[forUnit]).toFixed(2);
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+            },
+            exchangeBack(insert, needUnit, forUnit) {
+                var self = this;
+                url = 'http://data.fixer.io/api/latest?access_key=f6dfba2a7214bf6896ebb7f527e11a19'
+                url += '&symbols=' + needUnit + ',' + forUnit
+
+                axios.get(url)
+                    .then(resp => {
+                        rates = resp.data.rates
+                        //console.log((insert / rates[needUnit]) * rates[forUnit])
+                        this.NeedExchange = ((insert / rates[needUnit]) * rates[forUnit]).toFixed(2);
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+            },
+            SetNeedExchangeUnit(val) {
+                this.NeedExchangeUnit = val;
+                this.exchangeTo(this.NeedExchange, this.NeedExchangeUnit, this.ForExchangeUnit)
+            },
+            SetForExchangeUnit(val) {
+                this.ForExchangeUnit = val;
+                this.exchangeBack(this.ForExchange, this.ForExchangeUnit, this.NeedExchangeUnit)
             }
+        }
     });
 </script>
 @endsection
