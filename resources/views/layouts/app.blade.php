@@ -28,7 +28,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    DevFun
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -53,6 +53,9 @@
                             <a class="nav-link" href="{{ route('chats.index') }}">{{ __('Chat Records') }}</a>
                         </li>
                         @endauth
+                        <li class="nav-item {{ request()->is('exchange') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('exchange') }}">{{ __('Exchange') }}</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

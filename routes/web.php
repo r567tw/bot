@@ -27,4 +27,4 @@ Route::resource('posts', 'PostController');
 Route::get('chat', 'ChatRoomController@index')->name('chatroom');
 Route::post('chat', 'ChatRoomController@store')->name('chat');
 Route::resource('chats', 'ChatController');
-Route::get('exchange','ExchangeController@exchange');
+Route::get('exchange','ExchangeController@exchange')->name('exchange');

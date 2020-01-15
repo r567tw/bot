@@ -9,6 +9,13 @@
 
                 <div class="card-body" id="exchangeApp">
                     <div class="form-inline">
+                        <p class="alert alert-info">
+                            此工具資料來源來自於
+                            https://fixer.io/，在實際上轉換會有一些些的差異，但基本上應該不會相差太多。僅供參考，責任須自行負責。
+
+                        </p>
+                    </div>
+                    <div class="form-inline">
                         <label class="col-md-2" for="NeedExchange">被換的貨幣與數字</label>
                         <input type="number" name="NeedExchange" class="form-control col-md-3" id="NeedExchange"
                             v-model="NeedExchange" @change="exchangeTo(NeedExchange,NeedExchangeUnit,ForExchangeUnit)"
@@ -24,7 +31,11 @@
                     </div>
                     <br />
                     <div class="form-inline">
-                        <label class="col-md-2" for="ForExchange">被換的貨幣與數字</label>
+                        <label class="col-md-2">＝</label>
+                    </div>
+                    <br />
+                    <div class="form-inline">
+                        <label class="col-md-2" for="ForExchange">欲換的貨幣與數字</label>
                         <input type="number" name="ForExchange" class="form-control col-md-3" id="ForExchange"
                             v-model="ForExchange" @change="exchangeBack(ForExchange,ForExchangeUnit,NeedExchangeUnit)">
                         <div class="col-md-6">
