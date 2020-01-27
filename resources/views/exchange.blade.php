@@ -12,7 +12,10 @@
                         <p class="alert alert-info">
                             此工具資料來源來自於
                             https://fixer.io/，在實際上轉換會有一些些的差異，但基本上應該不會相差太多。僅供參考，責任須自行負責。
+                        </p>
 
+                        <p class="alert alert-danger">
+                            因為Fixer API 支援https需要額外收費與收錢，因此僅供本機以及Line bot 使用。Heroku 上面目前暫時停用
                         </p>
                     </div>
                     <div class="form-inline">
