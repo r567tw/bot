@@ -28,3 +28,4 @@ Route::get('chat', 'ChatRoomController@index')->name('chatroom');
 Route::post('chat', 'ChatRoomController@store')->name('chat');
 Route::resource('chats', 'ChatController');
 Route::get('exchange','ExchangeController@exchange')->name('exchange');
+Route::get('weather','WeatherController@weather')->name('weather');

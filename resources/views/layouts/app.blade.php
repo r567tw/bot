@@ -54,6 +54,9 @@
                         <li class="nav-item {{ request()->is('exchange') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('exchange') }}">{{ __('Exchange') }}</a>
                         </li>
+                        <li class="nav-item {{ request()->is('weather') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('weather') }}">{{ __('Weather') }}</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
