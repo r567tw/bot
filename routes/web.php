@@ -16,7 +16,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('test',function(){
-    return 'This is test page';
+    return 'This is test page2';
 });
 
 Route::post('/webhook', 'WebhookController@index');
