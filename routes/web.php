@@ -15,6 +15,10 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('test',function(){
+    return 'This is test page';
+});
+
 Route::post('/webhook', 'WebhookController@index');
 
 Route::resource('users', 'UserDashBoardController');
