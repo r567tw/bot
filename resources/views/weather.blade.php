@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<?php header('Access-Control-Allow-Origin: *'); ?>
+
 <div class="container" id="exchangeApp">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -19,7 +21,7 @@
 @endsection
 
 @section('script')
-<script>
+<script crossorigin="anonymous">
     const vm = new Vue({
         el: '#weatherApp',
         data: {
@@ -34,21 +36,14 @@
                 console.log(location);
                 var self = this;
                 url = 'https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001';
-                // url += '&symbols=' + needUnit + ',' + forUnit
+                url = `/api/weather/${location}`;
                 var options = {
-                    'headers':{
-                        'Access-Control-Allow-Origin':'*'
-                    },
-                    'data':{
-                        'Authorization':'CWB-8617C293-566E-4A6E-BDBB-59443A4134C1',
-                        'format':'JSON',
-                        'locationName':location
-                    }
+                    'locationName':location
                 };
                 axios.get(url,options)
                     .then(resp => {
-                        console.log(resp)
-                        this.weatherData = resp
+                        console.log(resp.data)
+                        this.weatherData = resp.data
                     })
                     .catch(err => {
                         console.log(err)
