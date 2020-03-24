@@ -12,7 +12,10 @@
                 <div class="card-body" id="weatherApp">
                     <input type="text" v-model="location">
                     <input type="submit" @click="getWeather(location)">
-                    @{{ weatherData }}
+                    <br/>
+                    <div class="col-md-12">
+                        @{{ weatherData }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -35,7 +38,7 @@
             getWeather(location) {
                 console.log(location);
                 var self = this;
-                url = 'https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001';
+
                 url = `/api/weather/${location}`;
                 var options = {
                     'locationName':location
