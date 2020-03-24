@@ -13,7 +13,8 @@
                     <input type="text" v-model="location">
                     <input type="submit" @click="getWeather(location)">
                     <br/>
-                    <textarea class="col-md-12" name="" id="" cols="30" rows="10">@{{ weatherData }}</textarea>
+                    <br/>
+                    <textarea class="col-md-12" name="" id="" rows="20" readonly>@{{ weatherData }}</textarea>
                 </div>
             </div>
         </div>
