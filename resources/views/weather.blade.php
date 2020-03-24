@@ -13,9 +13,7 @@
                     <input type="text" v-model="location">
                     <input type="submit" @click="getWeather(location)">
                     <br/>
-                    <div class="col-md-12">
-                        @{{ weatherData }}
-                    </div>
+                    <textarea class="col-md-12" name="" id="" cols="30" rows="10">@{{ weatherData }}</textarea>
                 </div>
             </div>
         </div>
@@ -29,7 +27,20 @@
         el: '#weatherApp',
         data: {
             location: '',
-            weatherData: ''
+            weatherData: `臺北市未來二十四小時天氣現象
+18:00-06:00: 多雲
+06:00-18:00: 多雲午後短暫陣雨
+
+臺北市未來二十四小時降雨機率
+18:00-06:00: 20%
+06:00-18:00: 40%
+
+臺北市未來二十四小時溫度範圍
+18:00-06:00: 21°C ~ 24°C
+06:00-18:00: 21°C ~ 29°C
+
+臺北市未來二十四小時舒適度
+18:00-06:00: 舒適`
         },
         created() {
 
