@@ -93,7 +93,8 @@
         methods: {
             fetchSymbols() {
                 var self = this;
-                axios.get('http://data.fixer.io/api/symbols?access_key=f6dfba2a7214bf6896ebb7f527e11a19')
+                url =
+                axios.get('/api/exchange')
                     .then(resp => {
                         var symbolsData = resp.data.symbols;
                         var arrayData = []
@@ -109,14 +110,13 @@
             },
             exchangeTo(insert, needUnit, forUnit) {
                 var self = this;
-                url = 'http://data.fixer.io/api/latest?access_key=f6dfba2a7214bf6896ebb7f527e11a19'
-                url += '&symbols=' + needUnit + ',' + forUnit
+                url = `https://prime.exchangerate-api.com/v5/d05b7dd2b0ce6a8965d0511c/latest/${needUnit}`
 
                 axios.get(url)
                     .then(resp => {
-                        rates = resp.data.rates
-                        console.log((insert / rates[needUnit]) * rates[forUnit])
-                        this.ForExchange = ((insert / rates[needUnit]) * rates[forUnit]).toFixed(2);
+                        var rate = resp.data.conversion_rates[forUnit]
+                        console.log(insert*rate);
+                        this.ForExchange = insert*rate.toFixed(2);
                     })
                     .catch(err => {
                         console.log(err)
@@ -124,14 +124,13 @@
             },
             exchangeBack(insert, needUnit, forUnit) {
                 var self = this;
-                url = 'http://data.fixer.io/api/latest?access_key=f6dfba2a7214bf6896ebb7f527e11a19'
-                url += '&symbols=' + needUnit + ',' + forUnit
+                url = `https://prime.exchangerate-api.com/v5/d05b7dd2b0ce6a8965d0511c/latest/${needUnit}`
 
                 axios.get(url)
                     .then(resp => {
-                        rates = resp.data.rates
+                        var rate = resp.data.conversion_rates[forUnit]
                         //console.log((insert / rates[needUnit]) * rates[forUnit])
-                        this.NeedExchange = ((insert / rates[needUnit]) * rates[forUnit]).toFixed(2);
+                        this.NeedExchange = insert*rate.toFixed(2);
                     })
                     .catch(err => {
                         console.log(err)

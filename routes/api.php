@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resource('chats', 'Api\ChatController');
 Route::get('weather/{location}','Api\WeatherController@index');
+Route::get('exchange','Api\ExchangeController@getList');
