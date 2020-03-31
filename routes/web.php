@@ -33,3 +33,4 @@ Route::post('chat', 'ChatRoomController@store')->name('chat');
 Route::resource('chats', 'ChatController');
 Route::get('exchange','ExchangeController@exchange')->name('exchange');
 Route::get('weather','WeatherController@weather')->name('weather');
+Route::get('CoV19','CoV19Controller@getResult')->name('cov19');
