@@ -9,15 +9,16 @@
     "license": "MIT",
     "require": {
         "php": "^7.1.3",
+        "andreasindal/laravel-markdown": "^3.1",
         "fideloper/proxy": "^4.0",
+        "fzaninotto/faker": "^1.4",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "linecorp/line-bot-sdk": "^3.12",
         "maknz/slack": "^1.7",
         "rap2hpoutre/laravel-log-viewer": "^1.2",
-        "symfony/dom-crawler": "^4.3",
-        "fzaninotto/faker": "^1.4"
+        "symfony/dom-crawler": "^4.3"
     },
     "require-dev": {
         "filp/whoops": "^2.0",
