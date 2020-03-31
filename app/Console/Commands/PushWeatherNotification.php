@@ -45,5 +45,8 @@ class PushWeatherNotification extends Command
 
         $weatherReport = $this->weather->getApiData('今日天氣:臺北市');
         $this->lineBotService->pushMessage(env('LINE_USER_ID'), $weatherReport);
+        //temp
+        $cov19Report = $this->weather->getCov19Data();
+        $this->lineBotService->pushMessage(env('LINE_USER_ID'), $cov19Report);
     }
 }

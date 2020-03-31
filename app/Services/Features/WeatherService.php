@@ -166,4 +166,22 @@ class WeatherService
 
         return $report;
     }
+
+    public function getCov19Data()
+    {
+        $url = 'https://od.cdc.gov.tw/eic/Weekly_Age_County_Gender_19CoV.json';
+
+        $response = $this->client->request('GET', $url);
+        $content = json_decode($response->getBody()->getContents());
+
+        $data = collect($content)->groupBy('縣市')->map(function($item){
+             return $item->sum('確定病例數');
+        });
+
+        $result = "新冠肺炎疫情全台狀況\n";
+        foreach ($data as $key => $value) {
+            $result .= $key.'有'.$value."人確診\n";
+        }
+        return $result;
+    }
 }
