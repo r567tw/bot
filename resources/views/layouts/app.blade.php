@@ -19,6 +19,11 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        .container img {
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>

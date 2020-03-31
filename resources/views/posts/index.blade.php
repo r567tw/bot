@@ -13,7 +13,6 @@
                     <table class="table">
                         <thead>
                             <th>Title</th>
-                            <th>Content</th>
                             <th>Author</th>
                             <th>Action</th>
                         </thead>
@@ -21,7 +20,6 @@
                             @foreach ($posts as $post)
                             <tr>
                                 <td>{{ $post->title }}</td>
-                                <td>{{ str_limit($post->content,10) }}</td>
                                 <td>{{ $post->author }}</td>
                                 <td>
                                     <a class="btn btn-info" href="{{ route('posts.edit',$post->id) }}">Edit</a>
