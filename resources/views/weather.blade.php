@@ -13,7 +13,6 @@
                     <div class="form-inline">
                         <select name="location" id="" v-model="location" class="form-control col-md-3">
                             <option value="臺北市">臺北市</option>
-                            <option value="臺北縣">臺東縣</option>
                             <option value="宜蘭縣">宜蘭縣</option>
                             <option value="花蓮縣">花蓮縣</option>
                             <option value="臺東縣">臺東縣</option>
