@@ -61,6 +61,16 @@ class WebhookTest extends TestCase
 
     }
 
+    public function testGetCovid19Data()
+    {
+        $request = $this->webhookRequest('武漢肺炎');
+        $response = $this->post('webhook', $request);
+
+        $response->assertStatus(200);
+        $response->assertSeeText('新冠肺炎疫情全台狀況');
+
+    }
+
     private function webhookRequest($message)
     {
         return array(

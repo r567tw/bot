@@ -7,6 +7,7 @@ use App\Services\CrawlerService;
 use App\Services\Features\AstroService;
 use App\Services\Features\WeatherService;
 use App\Services\Features\ExchangeService;
+use App\Services\Features\CoVid19Service;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
@@ -19,11 +20,13 @@ class WebhookResponseService
     public function __construct(
         AstroService $astro,
         WeatherService $weather,
-        ExchangeService $exchange
+        ExchangeService $exchange,
+        CoVid19Service $covid19
     ) {
         $this->astro = $astro;
         $this->weather = $weather;
         $this->exchange = $exchange;
+        $this->Covid19 = $covid19; 
     }
 
 
@@ -48,6 +51,12 @@ class WebhookResponseService
                 return $this->weather->getApiData($message);
             case Str::startsWith($message, 'exchange'):
                 return $this->exchange->exchange($message);
+            case Str::startsWith($message, '換外匯'):
+                return $this->exchange->exchange($message);
+            case Str::startsWith($message, '武漢肺炎'):
+                return $this->Covid19->getCov19Data();
+            case Str::startsWith($message, 'CoVid19'):
+                return $this->Covid19->getCov19Data();
             default:
                 return '[Playground]目前我無法處理此訊息～之後將開發更多新功能，盡請期待！';
         }
