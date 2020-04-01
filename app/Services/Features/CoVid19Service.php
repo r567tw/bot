@@ -5,7 +5,7 @@ namespace App\Services\Features;
 use GuzzleHttp\Client;
 use Carbon\Carbon;
 
-class Cov19Service
+class CoVid19Service
 {
 
     private $client;

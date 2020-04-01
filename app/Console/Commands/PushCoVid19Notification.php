@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Services\Features\Cov19Service;
+use App\Services\Features\CoVid19Service;
 use App\Services\LineBotService;
 
 class PushCoVid19Notification extends Command
@@ -13,7 +13,7 @@ class PushCoVid19Notification extends Command
      *
      * @var string
      */
-    protected $signature = 'line:coVid19';
+    protected $signature = 'line:CoVid19';
 
     /**
      * The console command description.
@@ -28,7 +28,7 @@ class PushCoVid19Notification extends Command
      *
      * @return void
      */
-    public function __construct(Cov19Service $service)
+    public function __construct(CoVid19Service $service)
     {
         parent::__construct();
         $this->service = $service;
