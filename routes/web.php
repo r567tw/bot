@@ -38,3 +38,4 @@ Route::get('CoVid19/area','CoVid19Controller@getResultByArea')->name('CoVid19.ar
 Route::get('CoVid19/age','CoVid19Controller@getResultByAge')->name('CoVid19.age');
 Route::get('CoVid19/gender','CoVid19Controller@getResultByGender')->name('CoVid19.gender');
 Route::get('CoVid19/foreign','CoVid19Controller@getResultByForeign')->name('CoVid19.gender');
+Route::get('CoVid19/international','CoVid19Controller@getInternational')->name('CoVid19.international');

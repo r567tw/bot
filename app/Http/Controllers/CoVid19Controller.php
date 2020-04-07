@@ -57,5 +57,10 @@ class CoVid19Controller extends Controller
         })->sort()->reverse();
         return view('CoVid19.foreign')->with('result',$result);
     }
+
+    public function getInternational()
+    {
+        return view('CoVid19.international');
+    }
     
 }
