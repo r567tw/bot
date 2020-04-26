@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Services\LineBotService;
 use App\Services\WebhookResponseService;
 use App\Transformers\Requests\WebhookRequestTransformer;
+use Log;
 
 class WebhookController extends Controller
 {
@@ -20,6 +21,9 @@ class WebhookController extends Controller
 
     public function index(Request $request,WebhookRequestTransformer $reqTransformer)
     {
+        Log::alert('Webhook has request');
+        Log::alert($request);
+
         foreach ($request['events'] as $event) {
 
             $webhookRequest = $reqTransformer->tramsforRequest($event);
