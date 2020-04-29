@@ -57,7 +57,7 @@ return [
             'driver' => 'slack',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
             'username' => 'DevPlayground',
-            'emoji' => ':line:',
+            'emoji' => ':computer:',
             'level' => 'info',
         ],
 
