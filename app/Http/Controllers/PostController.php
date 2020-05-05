@@ -45,6 +45,9 @@ class PostController extends Controller
     {
         $values = $request->all();
         $values['user_id'] = auth()->user()->id;
+        $values['content'] = str_replace('::info','<div class=\'alert alert-info\'>',$values['content']);
+        $values['content'] = str_replace('::','</div>',$values['content']);
+
         $post = Post::create($values);
         return redirect('/posts');
     }
@@ -80,8 +83,11 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        $post->update($request->all());
-        return redirect('/posts');
+        $values = $request->all();
+        $values['content'] = str_replace('::info','<div class=\'alert alert-info\'>',$values['content']);
+        $values['content'] = str_replace('::','</div>',$values['content']);
+        $post->update($values);
+        return redirect(route('posts.show',$post->id));
     }
 
     /**

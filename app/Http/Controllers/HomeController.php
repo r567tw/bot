@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Post;
 
 class HomeController extends Controller
 {
@@ -25,6 +26,6 @@ class HomeController extends Controller
     public function index()
     {
         $today = Carbon::now()->setTimezone('Asia/Taipei');
-        return view('home')->withToday($today);
+        return view('home')->withToday($today)->withPosts(Post::all());
     }
 }
