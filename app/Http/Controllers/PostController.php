@@ -87,7 +87,7 @@ class PostController extends Controller
         $values['content'] = str_replace('::info','<div class=\'alert alert-info\'>',$values['content']);
         $values['content'] = str_replace('::','</div>',$values['content']);
         $post->update($values);
-        return redirect('/posts');
+        return redirect(route('posts.show',$post->id));
     }
 
     /**
