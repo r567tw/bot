@@ -2,12 +2,15 @@
 
 @section('content')
 <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/default.min.css">
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.2/styles/a11y-dark.min.css">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Show Post</div>
+                <div class="card-header">
+                    Show Post
+                    <a class="btn btn-info" href="{{ route('posts.edit',$post->id) }}">Edit</a>
+                </div>
 
                 <div class="card-body">
                         {{ csrf_field() }}
@@ -40,4 +43,6 @@
     }
     highlightCode();
     </script>
+<script src="https://cdn.jsdelivr.net/npm/code-line"></script>
+<script>CodeLine.initOnPageLoad()</script>
 @endsection
