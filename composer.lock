@@ -4,25 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "88006eb56e2f6ba31adbcdb467e0e48b",
+    "content-hash": "113981634ae5e95d44c06e85ed0ca8d0",
     "packages": [
         {
             "name": "andreasindal/laravel-markdown",
-            "version": "3.1.1",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/andreasindal/laravel-markdown.git",
-                "reference": "284629324cc391d04f1709e399793ac2d55d0ae1"
+                "reference": "afa349ec54bd05711e34e73c73f68fa4f1671420"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/andreasindal/laravel-markdown/zipball/284629324cc391d04f1709e399793ac2d55d0ae1",
-                "reference": "284629324cc391d04f1709e399793ac2d55d0ae1",
+                "url": "https://api.github.com/repos/andreasindal/laravel-markdown/zipball/afa349ec54bd05711e34e73c73f68fa4f1671420",
+                "reference": "afa349ec54bd05711e34e73c73f68fa4f1671420",
                 "shasum": ""
             },
             "require": {
                 "erusev/parsedown": "^1.6",
-                "illuminate/support": ">=5.5 < 6|^6"
+                "illuminate/support": "^5.5|^5.6|^5.7"
             },
             "require-dev": {
                 "mockery/mockery": "^0.9.9",
@@ -58,7 +58,7 @@
                 }
             ],
             "description": "Simple Blade directive for markdown parsing.",
-            "time": "2020-01-28T07:49:52+00:00"
+            "time": "2018-09-16T18:58:54+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -711,6 +711,7 @@
                     "email": "jakub.onderka@gmail.com"
                 }
             ],
+            "abandoned": "php-parallel-lint/php-console-color",
             "time": "2018-09-29T17:23:10+00:00"
         },
         {
@@ -757,6 +758,7 @@
                 }
             ],
             "description": "Highlight PHP code in terminal",
+            "abandoned": "php-parallel-lint/php-console-highlighter",
             "time": "2018-09-29T18:48:56+00:00"
         },
         {
