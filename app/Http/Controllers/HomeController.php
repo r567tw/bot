@@ -26,6 +26,6 @@ class HomeController extends Controller
     public function index()
     {
         $today = Carbon::now()->setTimezone('Asia/Taipei');
-        return view('home')->withToday($today)->withPosts(Post::all());
+        return view('home')->withToday($today);
     }
 }

@@ -22,14 +22,6 @@
                     </div>
                 </div>
             </div>
-            @foreach ($posts as $post)
-            <div class="card" style="margin-bottom:20px">
-            <div class="card-header">{{ $post->title }}</div>
-                <div class="card-body">
-                    @markdown($post->content)
-                </div>
-            </div>
-            @endforeach
         </div>
     </div>
 </div>
