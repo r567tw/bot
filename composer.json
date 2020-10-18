@@ -19,7 +19,9 @@
         "linecorp/line-bot-sdk": "^3.12",
         "maknz/slack": "^1.7",
         "rap2hpoutre/laravel-log-viewer": "^1.2",
-        "symfony/dom-crawler": "^4.3"
+        "symfony/dom-crawler": "^4.3",
+        "workerman/channel": "^1.0",
+        "workerman/workerman": "^4.0"
     },
     "require-dev": {
         "doctrine/dbal": "^2.10",

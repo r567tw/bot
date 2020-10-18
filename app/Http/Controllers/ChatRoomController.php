@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Chat;
 use Illuminate\Http\Request;
-use  App\Chat;
 use Illuminate\Support\Facades\Auth;
 
 class ChatRoomController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['chatroom']);
     }
-
 
     public function index()
     {
@@ -27,5 +26,10 @@ class ChatRoomController extends Controller
         $chat->save();
 
         return $chat;
+    }
+
+    public function chatroom()
+    {
+        return view('chatroom');
     }
 }
