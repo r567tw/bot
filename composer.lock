@@ -4495,16 +4495,16 @@
         },
         {
             "name": "workerman/channel",
-            "version": "v1.0.5",
+            "version": "v1.0.6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/walkor/Channel.git",
-                "reference": "0836a9a413c6e8425ee36307d95e2e49cc380f50"
+                "url": "https://github.com/walkor/channel.git",
+                "reference": "bf6d837705738d875162a7344818e1bf02e8cef2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/walkor/Channel/zipball/0836a9a413c6e8425ee36307d95e2e49cc380f50",
-                "reference": "0836a9a413c6e8425ee36307d95e2e49cc380f50",
+                "url": "https://api.github.com/repos/walkor/channel/zipball/bf6d837705738d875162a7344818e1bf02e8cef2",
+                "reference": "bf6d837705738d875162a7344818e1bf02e8cef2",
                 "shasum": ""
             },
             "require": {
@@ -4521,7 +4521,7 @@
                 "MIT"
             ],
             "homepage": "http://www.workerman.net",
-            "time": "2018-07-02T02:42:37+00:00"
+            "time": "2020-10-19T02:04:29+00:00"
         },
         {
             "name": "workerman/workerman",
@@ -4669,16 +4669,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "2.11.1",
+            "version": "2.11.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "6e6903cd5e3a5be60a79439e3ee8fe126f78fe86"
+                "reference": "b88a45cbc395e850b2d958dcd7b9d49d09ff23e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/6e6903cd5e3a5be60a79439e3ee8fe126f78fe86",
-                "reference": "6e6903cd5e3a5be60a79439e3ee8fe126f78fe86",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/b88a45cbc395e850b2d958dcd7b9d49d09ff23e0",
+                "reference": "b88a45cbc395e850b2d958dcd7b9d49d09ff23e0",
                 "shasum": ""
             },
             "require": {
@@ -4690,12 +4690,11 @@
             "require-dev": {
                 "doctrine/coding-standard": "^8.1",
                 "jetbrains/phpstorm-stubs": "^2019.1",
-                "nikic/php-parser": "^4.4",
                 "phpstan/phpstan": "^0.12.40",
-                "phpunit/phpunit": "^9.3",
+                "phpunit/phpunit": "^9.4",
                 "psalm/plugin-phpunit": "^0.10.0",
                 "symfony/console": "^2.0.5|^3.0|^4.0|^5.0",
-                "vimeo/psalm": "^3.14.2"
+                "vimeo/psalm": "^3.17.2"
             },
             "suggest": {
                 "symfony/console": "For helpful console commands such as SQL execution and import of files."
@@ -4773,7 +4772,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-09-27T04:09:41+00:00"
+            "time": "2020-10-19T02:01:37+00:00"
         },
         {
             "name": "doctrine/event-manager",
