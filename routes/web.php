@@ -34,6 +34,8 @@ Route::resource('chats', 'ChatController');
 Route::get('chat-room', 'ChatRoomController@chatroom');
 Route::get('exchange', 'ExchangeController@exchange')->name('exchange');
 Route::get('weather', 'WeatherController@weather')->name('weather');
+Route::get('line/test', 'LineController@notify');
+
 Route::get('CoVid19', 'CoVid19Controller@index')->name('CoVid19.index');
 Route::get('CoVid19/area', 'CoVid19Controller@getResultByArea')->name('CoVid19.area');
 Route::get('CoVid19/age', 'CoVid19Controller@getResultByAge')->name('CoVid19.age');
