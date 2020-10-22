@@ -10,7 +10,6 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-6 alert alert-success">
-                            (V2) <br />
                             現在是 {{ $today->format('Y-m-d') }}，<br />
                             今年的第{{ $today->weekOfYear }}週<br />
                             今年的第{{ $today->dayOfYear }}天<br />
@@ -26,11 +25,13 @@
                             <ul style="list-style:none">
                                 @if (Auth::check())
                                     <li>
-                                        <form action="{{ route('line_notify.user.data') }}" method="post">
-                                            <input type="hidden" name="id" value="{{ Auth::user()->id }}">
-                                            @csrf
-                                            <button type="submit" class="btn btn-success">連結Line notify 帳號</button>
-                                        </form>
+                                        @unless(Auth::user()->access_token)
+                                            <form action="{{ route('line_notify.user.data') }}" method="post">
+                                                <input type="hidden" name="id" value="{{ Auth::user()->id }}">
+                                                @csrf
+                                                <button type="submit" class="btn btn-success">連結Line notify 帳號</button>
+                                            </form>
+                                        @endunless
                                     </li>
                                 @endif
                             </ul>
