@@ -15,11 +15,13 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('test', function () {
-    return 'This is test page2';
-});
+// Route::get('test', function () {
+//     return 'This is test page2';
+// });
 
 Route::post('/webhook', 'WebhookController@index');
+Route::post('/line_notify/user', 'LineController@notifyUserData')->name('line_notify.user.data');
+Route::get('/line_notify/user', 'LineController@notifyUser')->name('line_notify.user');
 
 Route::resource('users', 'UserDashBoardController');
 
@@ -34,7 +36,7 @@ Route::resource('chats', 'ChatController');
 Route::get('chat-room', 'ChatRoomController@chatroom');
 Route::get('exchange', 'ExchangeController@exchange')->name('exchange');
 Route::get('weather', 'WeatherController@weather')->name('weather');
-Route::get('line/test', 'LineController@notify');
+// Route::get('line/test', 'LineController@notify');
 
 Route::get('CoVid19', 'CoVid19Controller@index')->name('CoVid19.index');
 Route::get('CoVid19/area', 'CoVid19Controller@getResultByArea')->name('CoVid19.area');

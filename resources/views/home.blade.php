@@ -14,10 +14,25 @@
                             今年的第{{ $today->weekOfYear }}週<br />
                             今年的第{{ $today->dayOfYear }}天<br />
                         </div>
-    
+
                         <div class="col-6 alert alert-info">
                             今年還剩下{{ $today->weeksInYear-$today->weekOfYear }}週<br />
                             今年還剩下{{ $today->daysInYear-$today->dayOfYear }}天<br />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 alert alert-warning">
+                            <ul style="list-style:none">
+                                @if (Auth::check())
+                                    <li>
+                                        <form action="{{ route('line_notify.user.data') }}" method="post">
+                                            <input type="hidden" name="id" value="{{ Auth::user()->id }}">
+                                            @csrf
+                                            <button type="submit" class="btn btn-success">連結Line notify 帳號</button>
+                                        </form>
+                                    </li>
+                                @endif
+                            </ul>
                         </div>
                     </div>
                 </div>

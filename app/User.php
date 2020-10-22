@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'is_admin', 'is_developer',
+        'name', 'email', 'password', 'is_admin', 'is_developer','line_token'
     ];
 
     /**
@@ -45,5 +45,10 @@ class User extends Authenticatable
     public function getAdminAttribute()
     {
         return ($this->is_admin) ? '是' : '否';
+    }
+
+    public function token()
+    {
+        return $this->hasOne()
     }
 }
