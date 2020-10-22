@@ -10,6 +10,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-6 alert alert-success">
+                            (V2) <br />
                             現在是 {{ $today->format('Y-m-d') }}，<br />
                             今年的第{{ $today->weekOfYear }}週<br />
                             今年的第{{ $today->dayOfYear }}天<br />

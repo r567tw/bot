@@ -30,7 +30,7 @@ class LineController extends Controller
         $params = [
             'response_type' => 'code',
             'client_id' => env('LINE_CLIENT_ID'),
-            'redirect_uri' => 'https://',
+            'redirect_uri' => 'https://r567tw-devplayground.herokuapp.com/line_notify/user',
             'scope' => 'notify',
             'state' => $user->id,
         ];
@@ -50,7 +50,7 @@ class LineController extends Controller
             'grant_type' => 'authorization_code',
             'code' => $code,
             'state' => $id,
-            'redirect_uri' => '',
+            'redirect_uri' => 'https: //r567tw-devplayground.herokuapp.com/line_notify/user',
             'client_id' => env('LINE_CLIENT_ID'),
             'client_secret' => env('LINE_CLIENT_SECRET'),
         ]);
