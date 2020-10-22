@@ -2,9 +2,8 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -16,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'is_admin', 'is_developer','line_token'
+        'name', 'email', 'password', 'is_admin', 'is_developer', 'line_token',
     ];
 
     /**
@@ -47,8 +46,4 @@ class User extends Authenticatable
         return ($this->is_admin) ? '是' : '否';
     }
 
-    public function token()
-    {
-        return $this->hasOne()
-    }
 }
