@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
+        "bref/bref": "^1.2",
         "fideloper/proxy": "^4.0",
         "fzaninotto/faker": "^1.4",
         "guzzlehttp/guzzle": "^6.3",
