@@ -29,5 +29,8 @@ class AppServiceProvider extends ServiceProvider
             \URL::forceScheme('https');
         }
         Schema::defaultStringLength(191);
+        if (!is_dir(config('view.compiled'))) {
+            mkdir(config('view.compiled'), 0755, true);
+        }
     }
 }

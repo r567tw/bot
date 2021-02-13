@@ -1,25 +1,40 @@
-service: app
+service: laravel
 
 provider:
     name: aws
-    region: us-east-1
+    # The AWS region in which to deploy (us-east-1 is the default)
+    region: ap-northeast-1
+    # The stage of the application, e.g. dev, production, staging… ('dev' is the default)
+    stage: dev
     runtime: provided.al2
 
-plugins:
-    - ./vendor/bref/bref
+package:
+    # Directories to exclude from deployment
+    exclude:
+        - node_modules/**
+        - public/storage
+        - resources/assets/**
+        - storage/**
+        - tests/**
 
 functions:
-    api:
-        handler: index.php
-        description: ''
+    # This function runs the Laravel website/API
+    web:
+        handler: public/index.php
+        DOCUMENT_ROOT: public
         timeout: 28 # in seconds (API Gateway has a timeout of 29 seconds)
         layers:
             - ${bref:layer.php-74-fpm}
         events:
             -   httpApi: '*'
+    # This function lets us run artisan commands in Lambda
+    artisan:
+        handler: artisan
+        timeout: 120 # in seconds
+        layers:
+            - ${bref:layer.php-74} # PHP
+            - ${bref:layer.console} # The "console" layer
 
-# Exclude files from deployment
-package:
-    exclude:
-        - 'node_modules/**'
-        - 'tests/**'
+plugins:
+    # We need to include the Bref plugin
+    - ./vendor/bref/bref
