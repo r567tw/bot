@@ -2,18 +2,14 @@
 
 namespace App\Services;
 
-use GuzzleHttp\Client;
-use App\Services\CrawlerService;
 use App\Services\Features\AstroService;
 use App\Services\Features\WeatherService;
 use App\Services\Features\ExchangeService;
 use App\Services\Features\CoVid19Service;
-use Carbon\Carbon;
 use Illuminate\Support\Str;
 
 class WebhookResponseService
 {
-    private $client;
     private $astro;
     private $weather;
 
@@ -26,7 +22,7 @@ class WebhookResponseService
         $this->astro = $astro;
         $this->weather = $weather;
         $this->exchange = $exchange;
-        $this->Covid19 = $covid19; 
+        $this->Covid19 = $covid19;
     }
 
 
